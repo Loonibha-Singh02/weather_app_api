@@ -3,6 +3,8 @@ import 'package:weather_app_api/Models/weather_model.dart';
 import 'package:weather_app_api/Screens/help_screen.dart';
 import 'package:weather_app_api/repo.dart';
 
+import '../CustomWidgets/button.dart';
+
 
 class HomeScreenPage extends StatefulWidget {
   const HomeScreenPage({super.key});
@@ -50,11 +52,14 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                 },
               ),
             ),
+
+
             body: Padding(
               padding: const EdgeInsets.all(15),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+
                   Row(
                     children: [
                       Expanded(
@@ -62,7 +67,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                           controller: controller,
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
-                              icon: Icon(Icons.clear),
+                              icon: Icon(Icons.clear, size: 15,),
                               onPressed: () {
                                 controller.clear();
                               },
@@ -77,18 +82,26 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                           ),
                         ),
                       ),
-                      ElevatedButton(
+                      CustomButtons(
                         onPressed: () async {
                           WeatherModel fetchedWeather = await Repo().getWeather(controller.text);
                           setState(() {
                             weatherModel = fetchedWeather; // Assigning fetched weather to weatherModel
                           });
-                        },
-                        child: Text('Search'),
+                        }, icon: Icons.search, size: 22,
                       ),
                     ],
                   ),
+
+
                   Text("Lat: ${weatherModel?.location?.lat ?? "Null"}") ,
+                  if (weatherModel?.current?.condition?.icon != null) // Check if icon URL is available
+                    Image.network(
+                      'https:${weatherModel?.current?.condition?.icon}',
+                      width: 64,
+                      height: 64,
+                    ),
+                  Text("Current Temp: ${weatherModel?.current?.tempC ?? "Null"}") ,
                   Text("Location: ${weatherModel?.location?.country ?? "Null"}"),
                   Text("Local Time: ${weatherModel?.location?.localtime ?? "Null"}")
                 ],

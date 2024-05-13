@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 
 class CustomButtons extends StatelessWidget {
-  final String text;
+  // final String text;
   final VoidCallback onPressed;
+  final IconData icon;
+  final double size;
+
 
   const CustomButtons({
     super.key,
-    required this.text,
+    // required this.text,
     required this.onPressed,
+    required this.icon,
+    required this.size,
+
 
   }
       );
@@ -16,17 +22,19 @@ class CustomButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onPressed,
-      child: Text(text, style: TextStyle(color: Colors.black),),
+      // child: Text(text, style: TextStyle(color: Colors.black),),
       style: ElevatedButton.styleFrom(
           elevation: 0,
-
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-              side: BorderSide(
-                  width: 1
-              )
-          )
-      ),
+          // shape: RoundedRectangleBorder(
+          //     borderRadius: BorderRadius.circular(10),
+          //     side: BorderSide(
+          //         width: 1
+          //     )
+          // )
+      ), child: Container(
+      width: 10,
+      child: Icon(icon, size: size, color: Colors.black, ),
+    )
     );
   }
 }
