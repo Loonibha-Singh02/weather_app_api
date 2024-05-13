@@ -20,7 +20,7 @@ class CustomButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return IconButton(
       onPressed: onPressed,
       // child: Text(text, style: TextStyle(color: Colors.black),),
       style: ElevatedButton.styleFrom(
@@ -31,10 +31,9 @@ class CustomButtons extends StatelessWidget {
           //         width: 1
           //     )
           // )
-      ), child: Container(
-      width: 10,
-      child: Icon(icon, size: size, color: Colors.black, ),
-    )
+      ),
+      icon: Icon(icon, size: size, color: Colors.white, ),
+
     );
   }
 }

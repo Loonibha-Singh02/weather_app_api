@@ -43,6 +43,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
           FocusManager.instance.primaryFocus?.unfocus();
         },
         child: Scaffold(
+            backgroundColor: Color(0XBB153448),
             appBar: AppBar(
               title: const Text("Weather Info"),
               leading: IconButton(
@@ -64,20 +65,25 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                     children: [
                       Expanded(
                         child: TextField(
+                          cursorColor: Colors.white70,
+                          style:  TextStyle(color: Colors.white70),
                           controller: controller,
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
-                              icon: Icon(Icons.clear, size: 15,),
+                              icon: Icon(Icons.clear, size: 15, color: Colors.white70,),
                               onPressed: () {
                                 controller.clear();
                               },
                             ),
                             labelText: "Search",
+                            labelStyle: TextStyle(color: Colors.white),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(color: Colors.white)
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(color: Colors.white)
                             ),
                           ),
                         ),
@@ -93,17 +99,16 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                     ],
                   ),
 
-
-                  Text("Lat: ${weatherModel?.location?.lat ?? "Null"}") ,
+                  Text("Lat: ${weatherModel?.location?.lat ?? "Null"}", style: TextStyle(color: Colors.white),) ,
                   if (weatherModel?.current?.condition?.icon != null) // Check if icon URL is available
                     Image.network(
                       'https:${weatherModel?.current?.condition?.icon}',
                       width: 64,
                       height: 64,
                     ),
-                  Text("Current Temp: ${weatherModel?.current?.tempC ?? "Null"}") ,
-                  Text("Location: ${weatherModel?.location?.country ?? "Null"}"),
-                  Text("Local Time: ${weatherModel?.location?.localtime ?? "Null"}")
+                  Text("Current Temp: ${weatherModel?.current?.tempC ?? "Null"}",style: TextStyle(color: Colors.white),) ,
+                  Text("Location: ${weatherModel?.location?.country ?? "Null"}",style: TextStyle(color: Colors.white),),
+                  Text("Local Time: ${weatherModel?.location?.localtime ?? "Null"}",style: TextStyle(color: Colors.white),)
                 ],
               ),
             )
