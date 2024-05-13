@@ -43,11 +43,16 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
           FocusManager.instance.primaryFocus?.unfocus();
         },
         child: Scaffold(
-            backgroundColor: Color(0XBB153448),
+            backgroundColor: Color(0XBB153440),
             appBar: AppBar(
-              title: const Text("Weather Info"),
+              elevation: 0,
+              backgroundColor: Color(0XBB153448),
+              title: Padding(
+                padding: const EdgeInsets.only(left: 50),
+                child: const Text("Weather Forecasting",style: TextStyle(color: Colors.white),),
+              ),
               leading: IconButton(
-                icon: const Icon(Icons.arrow_back_ios),
+                icon: const Icon(Icons.arrow_back_ios, color: Colors.white,),
                 onPressed: () {
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const HelpScreenPage()));
                 },
@@ -78,11 +83,11 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                             labelText: "Search",
                             labelStyle: TextStyle(color: Colors.white),
                             enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(20),
                               borderSide: BorderSide(color: Colors.white)
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(20),
                                 borderSide: BorderSide(color: Colors.white)
                             ),
                           ),
