@@ -5,6 +5,7 @@ import 'package:weather_app_api/Screens/help_screen.dart';
 import 'package:weather_app_api/repo.dart';
 import '../CustomWidgets/CustomGrid.dart';
 import '../CustomWidgets/CustomTempText.dart';
+import '../CustomWidgets/ElevatedButton.dart';
 import '../CustomWidgets/button.dart';
 
 class HomeScreenPage extends StatefulWidget {
@@ -25,7 +26,8 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
       "${weatherModel?.current?.humidity ?? ""}%",
       "${weatherModel?.current?.uv ?? ""}",
       "${weatherModel?.current?.windDir ?? ""}",
-    "${weatherModel?.current?.pressureMb ?? ""} mb",
+      "${weatherModel?.current?.pressureMb ?? ""} mb",
+
     ];
 
     List<String> title = [
@@ -68,14 +70,14 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                   children: [
                     Row(
                       children: [
-              
+
                         IconButton(
                           icon: const Icon(Icons.arrow_back_ios, color: Colors.white,),
                           onPressed: () {
                             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const HelpScreenPage()));
                           },
                         ),
-              
+
                         Expanded(
                           child: TextField(
                             cursorColor: Colors.white70,
@@ -90,7 +92,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                   });
                                 }, icon: Icons.search, size: 22,
                               ),
-              
+
                               labelText: "Search  Location",
                               labelStyle: TextStyle(color: Colors.white),
                               enabledBorder: OutlineInputBorder(
@@ -104,14 +106,14 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                             ),
                           ),
                         ),
-              
+
                         IconButton(
                           icon: Icon(Icons.clear, size: 15, color: Colors.white70,),
                           onPressed: () {
                             controller.clear();
                           },
                         ),
-              
+
                       ],
                     ),
                     SizedBox(height: 20),
@@ -184,12 +186,19 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                           ),
                         ),
                     ),
-
-
-
-
-
-
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: CustomElevButton(
+                            text: 'Save', onpressed: () {  },
+                          ),
+                        ),
+                        CustomElevButton(
+                          text: 'Update', onpressed: () {  },
+                        )
+                      ],
+                    )
 
                     // Image
                     // if (weatherModel?.current?.condition?.icon != null)
