@@ -10,7 +10,7 @@ import '../CustomWidgets/ElevatedButton.dart';
 import '../CustomWidgets/button.dart';
 
 class HomeScreenPage extends StatefulWidget {
-  const HomeScreenPage({Key? key}) : super(key: key);
+  const HomeScreenPage({super.key});
 
   @override
   State<HomeScreenPage> createState() => _HomeScreenPageState();
@@ -83,7 +83,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
   Future<void> _saveLocation(String location) async {
     await prefs.setString('location', location);
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
+      const SnackBar(
         content: Center(child: Text("Location saved successfully")),
         duration: Duration(
           seconds: 1
@@ -96,14 +96,14 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
     await showDialog(
         context: context,
         builder: (context)=> AlertDialog(
-              title: Text("Error"),
-          content: Text("Empty search field"),
+              title: const Text("Error"),
+          content: const Text("Empty search field"),
           actions: [
             TextButton(
                 onPressed: (){
                   Navigator.pop(context);
                 },
-                child: Text("Ok")
+                child: const Text("Ok")
             )
           ],
         )
@@ -174,11 +174,11 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                             labelStyle: const TextStyle(color: Colors.white),
                             enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide(color: Colors.white)
+                                borderSide: const BorderSide(color: Colors.white)
                             ),
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide(color: Colors.white)
+                                borderSide: const BorderSide(color: Colors.white)
                             ),
                           ),
                         ),
@@ -196,7 +196,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                     text: "${weatherModel?.location?.name ?? ""}, ${weatherModel?.location?.country ?? ""}",
                     fontSize: 30,
                   ),
-                  Container(
+                  SizedBox(
                     width: 500,
                     height: 260,
                     child: Stack(
@@ -204,7 +204,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                         Positioned(
                           top: 40,
                           right: 30,
-                          child: Container(
+                          child: SizedBox(
                             width: 100,
                             height: 50,
                             child: Stack(
@@ -252,7 +252,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 12),
-                    child: Container(
+                    child: SizedBox(
                       width: 500,
                       height: 300,
                       child: CustomGridView(
