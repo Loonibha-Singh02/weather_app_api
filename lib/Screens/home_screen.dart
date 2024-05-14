@@ -100,29 +100,10 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
               
                       ],
                     ),
-                    Container(
-                      width: 100,
-                      height: 50,
-                      child: Stack(
-                        children: [
-                          if (weatherModel?.current?.condition?.icon != null)
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Positioned(
-                                  top: 0,
-                                  left: 0, // Adjust left offset as needed
-                                  child: Image.network(
-                                    'https:${weatherModel?.current?.condition?.icon}',
-                                    width: 64,
-                                    height: 64,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          // Add more Positioned widgets or other widgets as needed
-                        ],
-                      ),
+                    SizedBox(height: 20),
+                    CustomFontText(
+                      text: "${weatherModel?.location?.name ?? ""}, ${weatherModel?.location?.country ?? ""}",
+                      fontSize: 30,
                     ),
                     Container(
                       width: 500,
@@ -130,8 +111,28 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                       child: Stack(
                         children: [
                           Positioned(
+                            top: 40,
+                           right: 30,
+                            child: Container(
+                              width: 100,
+                              height: 50,
+                              child: Stack(
+                                children: [
+                                  if (weatherModel?.current?.condition?.icon != null)
+                                    Positioned(
+                                      top: 0,
+                                      left: 0,
+                                      child: Image.network(
+                                        'https:${weatherModel?.current?.condition?.icon}',
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Positioned(
                             top: 30,
-                            left: 20, // Adjust the right offset as needed
+                            left: 20,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
@@ -145,12 +146,12 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                 SizedBox(height: 10),
                                 CustomFontText(
                                   text: "${weatherModel?.current?.condition?.text ?? ""}",
-                                  fontSize: 18,
+                                  fontSize: 16,
                                 ),
                                 SizedBox(height: 50),
                                 CustomFontText(
                                   text: "Feels like ${(weatherModel?.current?.feelslikeC ??0).toInt()} °",
-                                  fontSize: 18,
+                                  fontSize: 16,
                                 ),
                               ],
                             ),
@@ -158,6 +159,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                         ],
                       ),
                     ),
+
 
                     // Image
                     // if (weatherModel?.current?.condition?.icon != null)
