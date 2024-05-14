@@ -39,8 +39,31 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
   }
 
   Future<void> getCurrentLocation() async {
-    // Check and request permissions
-    // Fetch current position using Geolocator.getCurrentPosition()
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      // Location services are not enabled
+      return;
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle appropriately.
+      return;
+    }
+
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission != LocationPermission.whileInUse &&
+          permission != LocationPermission.always) {
+        return;
+      }
+    }
+
+    Position position = await Geolocator.getCurrentPosition();
+    fetchWeatherByLocation(position.latitude, position.longitude);
   }
 
   Future<void> fetchWeatherByLocation(double latitude, double longitude) async {
@@ -59,6 +82,14 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
 
   Future<void> _saveLocation(String location) async {
     await prefs.setString('location', location);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Center(child: Text("Location saved successfully")),
+        duration: Duration(
+          seconds: 1
+        ),
+      )
+    );
   }
 
   @override
@@ -213,6 +244,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                     ),
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(10),
