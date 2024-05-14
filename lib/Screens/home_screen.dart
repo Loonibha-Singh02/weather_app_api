@@ -61,7 +61,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
           FocusManager.instance.primaryFocus?.unfocus();
         },
         child: Scaffold(
-          backgroundColor: Color(0xBBA3D8FF),
+            backgroundColor: Color(0xBBA3D8FF),
             body: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.only(top: 50,left: 10,right: 20),
@@ -96,11 +96,11 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                               labelText: "Search  Location",
                               labelStyle: TextStyle(color: Colors.white),
                               enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide(color: Colors.white)
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide: BorderSide(color: Colors.white)
                               ),
                               focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
+                                  borderRadius: BorderRadius.circular(20),
                                   borderSide: BorderSide(color: Colors.white)
                               ),
                             ),
@@ -128,7 +128,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                         children: [
                           Positioned(
                             top: 40,
-                           right: 30,
+                            right: 30,
                             child: Container(
                               width: 100,
                               height: 50,
@@ -180,11 +180,11 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                       child: Container(
                         width: 500,
                         height: 300,
-                          child: CustomGridView(
-                            texts: texts,
-                            icons: icons, title: title,
-                          ),
+                        child: CustomGridView(
+                          texts: texts,
+                          icons: icons, title: title,
                         ),
+                      ),
                     ),
                     Row(
                       children: [
