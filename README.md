@@ -1,16 +1,23 @@
 # weather_app_api
 
-A new Flutter project.
+##Description 
+The Weather app api is a flutter application that allows to check the current weather.
 
-## Getting Started
+##Features
+-Current location weather shown based on the user location.
+-Location showed based on search input.
+-Display weather information including humidity, pressure, uv and wind speed.
+-Can save the location
 
-This project is a starting point for a Flutter application.
+##Installation and Run
+-Clone the repo in your local computer.
+-Install all the required dependencies
+-Run the app using emulator or your own phone.
+-Enter the desired location in search bar and view its current weather.
+-Click "Save" button to save your location.
 
-A few resources to get you started if this is your first Flutter project:
+##Reference
+-Api from =  http://www.weatherapi.com/
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+##Contact
+-For feedback or to provide any other information please contact "loonibhasingh@gmail.com"
