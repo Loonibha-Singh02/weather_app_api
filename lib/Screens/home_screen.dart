@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_app_api/Models/weather_model.dart';
 import 'package:weather_app_api/Screens/help_screen.dart';
 import 'package:weather_app_api/repo.dart';
 
+import '../CustomWidgets/CustomTempText.dart';
 import '../CustomWidgets/button.dart';
 
 
@@ -43,78 +45,130 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
           FocusManager.instance.primaryFocus?.unfocus();
         },
         child: Scaffold(
-            backgroundColor: Color(0XBB153440),
-            appBar: AppBar(
-              elevation: 0,
-              backgroundColor: Color(0XBB153448),
-              title: Padding(
-                padding: const EdgeInsets.only(left: 50),
-                child: const Text("Weather Forecasting",style: TextStyle(color: Colors.white),),
-              ),
-              leading: IconButton(
-                icon: const Icon(Icons.arrow_back_ios, color: Colors.white,),
-                onPressed: () {
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const HelpScreenPage()));
-                },
-              ),
-            ),
-
-
-            body: Padding(
-              padding: const EdgeInsets.all(15),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          cursorColor: Colors.white70,
-                          style:  TextStyle(color: Colors.white70),
-                          controller: controller,
-                          decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                              icon: Icon(Icons.clear, size: 15, color: Colors.white70,),
-                              onPressed: () {
-                                controller.clear();
-                              },
-                            ),
-                            labelText: "Search",
-                            labelStyle: TextStyle(color: Colors.white),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(color: Colors.white)
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
+          backgroundColor: Color(0xBBA3D8FF),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 50,left: 10,right: 20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+              
+                        IconButton(
+                          icon: const Icon(Icons.arrow_back_ios, color: Colors.white,),
+                          onPressed: () {
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const HelpScreenPage()));
+                          },
+                        ),
+              
+                        Expanded(
+                          child: TextField(
+                            cursorColor: Colors.white70,
+                            style:  TextStyle(color: Colors.white70),
+                            controller: controller,
+                            decoration: InputDecoration(
+                              suffixIcon:  CustomButtons(
+                                onPressed: () async {
+                                  WeatherModel fetchedWeather = await Repo().getWeather(controller.text);
+                                  setState(() {
+                                    weatherModel = fetchedWeather; // Assigning fetched weather to weatherModel
+                                  });
+                                }, icon: Icons.search, size: 22,
+                              ),
+              
+                              labelText: "Search  Location",
+                              labelStyle: TextStyle(color: Colors.white),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
                                 borderSide: BorderSide(color: Colors.white)
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                  borderSide: BorderSide(color: Colors.white)
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      CustomButtons(
-                        onPressed: () async {
-                          WeatherModel fetchedWeather = await Repo().getWeather(controller.text);
-                          setState(() {
-                            weatherModel = fetchedWeather; // Assigning fetched weather to weatherModel
-                          });
-                        }, icon: Icons.search, size: 22,
-                      ),
-                    ],
-                  ),
-
-                  Text("Lat: ${weatherModel?.location?.lat ?? "Null"}", style: TextStyle(color: Colors.white),) ,
-                  if (weatherModel?.current?.condition?.icon != null) // Check if icon URL is available
-                    Image.network(
-                      'https:${weatherModel?.current?.condition?.icon}',
-                      width: 64,
-                      height: 64,
+              
+                        IconButton(
+                          icon: Icon(Icons.clear, size: 15, color: Colors.white70,),
+                          onPressed: () {
+                            controller.clear();
+                          },
+                        ),
+              
+                      ],
                     ),
-                  Text("Current Temp: ${weatherModel?.current?.tempC ?? "Null"}",style: TextStyle(color: Colors.white),) ,
-                  Text("Location: ${weatherModel?.location?.country ?? "Null"}",style: TextStyle(color: Colors.white),),
-                  Text("Local Time: ${weatherModel?.location?.localtime ?? "Null"}",style: TextStyle(color: Colors.white),)
-                ],
+                    Container(
+                      width: 100,
+                      height: 50,
+                      child: Stack(
+                        children: [
+                          if (weatherModel?.current?.condition?.icon != null)
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Positioned(
+                                  top: 0,
+                                  left: 0, // Adjust left offset as needed
+                                  child: Image.network(
+                                    'https:${weatherModel?.current?.condition?.icon}',
+                                    width: 64,
+                                    height: 64,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          // Add more Positioned widgets or other widgets as needed
+                        ],
+                      ),
+                    ),
+                    Container(
+                      width: 500,
+                      height: 500,
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            top: 30,
+                            left: 20, // Adjust the right offset as needed
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  " ${(weatherModel?.current?.tempC ?? 0).toInt()}°",
+                                  style: GoogleFonts.pacifico(
+                                    fontSize: 90,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                CustomFontText(
+                                  text: "${weatherModel?.current?.condition?.text ?? ""}",
+                                  fontSize: 18,
+                                ),
+                                SizedBox(height: 50),
+                                CustomFontText(
+                                  text: "Feels like ${(weatherModel?.current?.feelslikeC ??0).toInt()} °",
+                                  fontSize: 18,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    // Image
+                    // if (weatherModel?.current?.condition?.icon != null)
+                    //   Image.network(
+                    //     'https:${weatherModel?.current?.condition?.icon}',
+                    //   ),
+                    // Text("Lat: ${weatherModel?.location?.lat ?? "Null"}", style: TextStyle(color: Colors.white),) ,
+                    // Text("Location: ${weatherModel?.location?.country ?? "Null"}",style: TextStyle(color: Colors.white),),
+                    // Text("Local Time: ${weatherModel?.location?.localtime ?? "Null"}",style: TextStyle(color: Colors.white),)
+                  ],
+                ),
               ),
             )
         ),
