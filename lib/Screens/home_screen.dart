@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_app_api/Models/weather_model.dart';
 import 'package:weather_app_api/Screens/help_screen.dart';
 import 'package:weather_app_api/repo.dart';
+import '../CustomWidgets/CustomGrid.dart';
 import '../CustomWidgets/CustomTempText.dart';
 import '../CustomWidgets/button.dart';
 
@@ -15,10 +16,25 @@ class HomeScreenPage extends StatefulWidget {
 
 class _HomeScreenPageState extends State<HomeScreenPage> {
   final TextEditingController controller= TextEditingController();
+
   WeatherModel? weatherModel;
 
   @override
   Widget build(BuildContext context) {
+    List<String> texts = [
+      "${weatherModel?.current?.humidity ?? ""}%",
+      "${weatherModel?.current?.uv ?? ""}",
+      "${weatherModel?.current?.windDir ?? ""}",
+    "${weatherModel?.current?.pressureMb ?? ""} mb",
+    ];
+
+    List<String> title = [
+      "Humidity",
+      'UV Index',
+      'Wind Direction',
+      'Pressure'
+    ];
+    List<IconData> icons = [Icons.water_drop_rounded, Icons.sunny, Icons.wind_power_outlined, Icons.compare_arrows];
 
     Future<void>_showErrorDialog() async{
       await showDialog(
@@ -157,6 +173,24 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                         ],
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 12),
+                      child: Container(
+                        width: 500,
+                        height: 300,
+                          child: CustomGridView(
+                            texts: texts,
+                            icons: icons, title: title,
+                          ),
+                        ),
+                    ),
+
+
+
+
+
+
+
                     // Image
                     // if (weatherModel?.current?.condition?.icon != null)
                     //   Image.network(
