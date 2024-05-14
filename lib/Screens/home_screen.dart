@@ -88,7 +88,25 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
         duration: Duration(
           seconds: 1
         ),
-      )
+      ),
+    );
+  }
+
+  Future<void> _showErrorDialog() async{
+    await showDialog(
+        context: context,
+        builder: (context)=> AlertDialog(
+              title: Text("Error"),
+          content: Text("Empty search field"),
+          actions: [
+            TextButton(
+                onPressed: (){
+                  Navigator.pop(context);
+                },
+                child: Text("Ok")
+            )
+          ],
+        )
     );
   }
 
@@ -253,6 +271,9 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                           onpressed: () {
                             if (controller.text.isNotEmpty) {
                               _saveLocation(controller.text);
+                            }
+                            else{
+                              _showErrorDialog();
                             }
                           },
                         ),
