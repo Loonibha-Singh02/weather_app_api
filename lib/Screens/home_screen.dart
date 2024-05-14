@@ -3,10 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_app_api/Models/weather_model.dart';
 import 'package:weather_app_api/Screens/help_screen.dart';
 import 'package:weather_app_api/repo.dart';
-
 import '../CustomWidgets/CustomTempText.dart';
 import '../CustomWidgets/button.dart';
-
 
 class HomeScreenPage extends StatefulWidget {
   const HomeScreenPage({super.key});
@@ -107,7 +105,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                     ),
                     Container(
                       width: 500,
-                      height: 500,
+                      height: 260,
                       child: Stack(
                         children: [
                           Positioned(
@@ -159,8 +157,6 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                         ],
                       ),
                     ),
-
-
                     // Image
                     // if (weatherModel?.current?.condition?.icon != null)
                     //   Image.network(
