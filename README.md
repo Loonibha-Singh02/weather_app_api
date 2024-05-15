@@ -15,6 +15,7 @@ The Weather app api is a flutter application that allows to check the current we
 -Run the app using emulator or your own phone.
 -Enter the desired location in search bar and view its current weather.
 -Click "Save" button to save your location.
+-Allow the location permission so that your location weather will be showed.
 
 ##Reference
 -Api from =  http://www.weatherapi.com/
