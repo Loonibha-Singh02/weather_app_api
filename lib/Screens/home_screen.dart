@@ -136,7 +136,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
           FocusManager.instance.primaryFocus?.unfocus();
         },
         child: Scaffold(
-          backgroundColor: const Color(0xBBA3D8FF),
+          backgroundColor: const Color.fromARGB(255, 107, 181, 233),
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.only(top: 60, left: 10, right: 20),

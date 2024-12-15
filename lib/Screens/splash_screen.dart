@@ -26,7 +26,7 @@ class _HelpScreenPageState extends State<HelpScreenPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xBBA3D8FF),
+      backgroundColor: const Color.fromARGB(255, 107, 181, 233),
       body: Container(
           padding:
               const EdgeInsets.only(right: 10, left: 10, top: 20, bottom: 20),
