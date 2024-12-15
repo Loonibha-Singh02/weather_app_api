@@ -41,6 +41,7 @@ dependencies:
   shared_preferences: ^2.2.3
   provider: ^6.1.2
   flutter_screenutil: ^5.9.3
+  device_preview: ^1.2.0
   
 
 dev_dependencies:

@@ -12,10 +12,15 @@ class _HelpScreenPageState extends State<HelpScreenPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 2), () {
+    _navigateToHomeScreen();
+  }
+
+  void _navigateToHomeScreen() async {
+    await Future.delayed(const Duration(seconds: 3));
+    if (mounted) {
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (context) => const HomeScreenPage()));
-    });
+    }
   }
 
   @override
