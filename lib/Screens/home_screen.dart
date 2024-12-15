@@ -115,7 +115,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
     List<String> texts = [
       "${weatherModel?.current?.humidity ?? ""}%",
       "${weatherModel?.current?.uv ?? ""}",
-      "${weatherModel?.current?.windDir ?? ""}",
+      (weatherModel?.current?.windDir ?? ""),
       "${weatherModel?.current?.pressureMb ?? ""} mb",
     ];
 
@@ -236,7 +236,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                               ),
                               const SizedBox(height: 10),
                               CustomFontText(
-                                text: "${weatherModel?.current?.condition?.text ?? ""}",
+                                text: weatherModel?.current?.condition?.text ?? "",
                                 fontSize: 16,
                               ),
                               const SizedBox(height: 50),
