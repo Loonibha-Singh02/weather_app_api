@@ -195,10 +195,13 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                     ],
                   ),
                   const SizedBox(height: 20),
-                  CustomFontText(
-                    text:
-                        "${weatherModel?.location?.name ?? ""}, ${weatherModel?.location?.country ?? ""}",
-                    fontSize: 30,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CustomFontText(
+                      text:
+                          "${weatherModel?.location?.name ?? ""}, ${weatherModel?.location?.country ?? ""}",
+                      fontSize: 30,
+                    ),
                   ),
                   SizedBox(
                     width: 500,
