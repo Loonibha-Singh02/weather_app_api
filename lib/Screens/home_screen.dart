@@ -83,12 +83,18 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
 
   Future<void> _saveLocation(String location) async {
     await prefs.setString('location', location);
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Center(child: Text("Location saved successfully")),
-        duration: Duration(seconds: 1),
-      ),
-    );
+    _snackBar();
+  }
+
+  void _snackBar() {
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Center(child: Text("Location saved successfully")),
+          duration: Duration(seconds: 1),
+        ),
+      );
+    }
   }
 
   Future<void> _showErrorDialog() async {
