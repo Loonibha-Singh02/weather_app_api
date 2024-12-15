@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:weather_app_api/Models/weather_model.dart';
-import 'package:weather_app_api/Screens/help_screen.dart';
+import 'package:weather_app_api/Screens/splash_screen.dart';
 import 'package:weather_app_api/repo.dart';
 import '../CustomWidgets/CustomGrid.dart';
 import '../CustomWidgets/CustomTempText.dart';
