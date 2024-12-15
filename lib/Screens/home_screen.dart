@@ -67,7 +67,8 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
   }
 
   Future<void> fetchWeatherByLocation(double latitude, double longitude) async {
-    WeatherModel fetchedWeather = await Repo().getWeatherByLL(latitude, longitude);
+    WeatherModel fetchedWeather =
+        await Repo().getWeatherByLL(latitude, longitude);
     setState(() {
       weatherModel = fetchedWeather;
     });
@@ -85,29 +86,25 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Center(child: Text("Location saved successfully")),
-        duration: Duration(
-          seconds: 1
-        ),
+        duration: Duration(seconds: 1),
       ),
     );
   }
 
-  Future<void> _showErrorDialog() async{
+  Future<void> _showErrorDialog() async {
     await showDialog(
         context: context,
-        builder: (context)=> AlertDialog(
+        builder: (context) => AlertDialog(
               title: const Text("Error"),
-          content: const Text("Empty search field"),
-          actions: [
-            TextButton(
-                onPressed: (){
-                  Navigator.pop(context);
-                },
-                child: const Text("Ok")
-            )
-          ],
-        )
-    );
+              content: const Text("Empty search field"),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text("Ok"))
+              ],
+            ));
   }
 
   @override
@@ -119,12 +116,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
       "${weatherModel?.current?.pressureMb ?? ""} mb",
     ];
 
-    List<String> title = [
-      "Humidity",
-      'UV Index',
-      'Wind Direction',
-      'Pressure'
-    ];
+    List<String> title = ["Humidity", 'UV Index', 'Wind Direction', 'Pressure'];
     List<IconData> icons = [
       Icons.water_drop_rounded,
       Icons.sunny,
@@ -141,16 +133,23 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
           backgroundColor: const Color(0xBBA3D8FF),
           body: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.only(top: 50, left: 10, right: 20),
+              padding: const EdgeInsets.only(top: 60, left: 10, right: 20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
                     children: [
                       IconButton(
-                        icon: const Icon(Icons.arrow_back_ios, color: Colors.white,),
+                        icon: const Icon(
+                          Icons.arrow_back_ios,
+                          color: Colors.white,
+                        ),
                         onPressed: () {
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HelpScreenPage()));
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const HelpScreenPage()));
                         },
                       ),
                       Expanded(
@@ -174,17 +173,21 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                             labelStyle: const TextStyle(color: Colors.white),
                             enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
-                                borderSide: const BorderSide(color: Colors.white)
-                            ),
+                                borderSide:
+                                    const BorderSide(color: Colors.white)),
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
-                                borderSide: const BorderSide(color: Colors.white)
-                            ),
+                                borderSide:
+                                    const BorderSide(color: Colors.white)),
                           ),
                         ),
                       ),
                       IconButton(
-                        icon: const Icon(Icons.clear, size: 15, color: Colors.white70,),
+                        icon: const Icon(
+                          Icons.clear,
+                          size: 15,
+                          color: Colors.white70,
+                        ),
                         onPressed: () {
                           controller.clear();
                         },
@@ -193,7 +196,8 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                   ),
                   const SizedBox(height: 20),
                   CustomFontText(
-                    text: "${weatherModel?.location?.name ?? ""}, ${weatherModel?.location?.country ?? ""}",
+                    text:
+                        "${weatherModel?.location?.name ?? ""}, ${weatherModel?.location?.country ?? ""}",
                     fontSize: 30,
                   ),
                   SizedBox(
@@ -209,7 +213,8 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                             height: 50,
                             child: Stack(
                               children: [
-                                if (weatherModel?.current?.condition?.icon != null)
+                                if (weatherModel?.current?.condition?.icon !=
+                                    null)
                                   Positioned(
                                     top: 0,
                                     left: 0,
@@ -236,12 +241,14 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                               ),
                               const SizedBox(height: 10),
                               CustomFontText(
-                                text: weatherModel?.current?.condition?.text ?? "",
+                                text: weatherModel?.current?.condition?.text ??
+                                    "",
                                 fontSize: 16,
                               ),
                               const SizedBox(height: 50),
                               CustomFontText(
-                                text: "Feels like ${(weatherModel?.current?.feelslikeC ??0).toInt()} °",
+                                text:
+                                    "Feels like ${(weatherModel?.current?.feelslikeC ?? 0).toInt()} °",
                                 fontSize: 16,
                               ),
                             ],
@@ -257,7 +264,8 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                       height: 300,
                       child: CustomGridView(
                         texts: texts,
-                        icons: icons, title: title,
+                        icons: icons,
+                        title: title,
                       ),
                     ),
                   ),
@@ -271,8 +279,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                           onpressed: () {
                             if (controller.text.isNotEmpty) {
                               _saveLocation(controller.text);
-                            }
-                            else{
+                            } else {
                               _showErrorDialog();
                             }
                           },
